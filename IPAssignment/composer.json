@@ -1,0 +1,13 @@
+{
+  "name": "UMD-ACES/IPAssignment",
+  "description": "Assigns IP addresses to groups",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Louis-Henri Merino"
+    }
+  ],
+  "require": {
+    "s1lentium/iptools": "v1.1.0"
+  }
+}
