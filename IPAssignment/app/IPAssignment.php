@@ -4,20 +4,21 @@ require '../vendor/autoload.php';
 
 if(!isset($argv[1]) || !isset($argv[2]))
 {
-    echo 'Usage: php '.$argv[0].' subnets groups <excludedIPs>'.PHP_EOL;
-    echo 'Example: php '.$argv[0].' 10.0.0.0/16,10.1.0.0/16 CLASS100_1A,CLASS100_1B 10.0.0.1,10.1.0.1'.PHP_EOL;
+    echo 'Usage: php '.$argv[0].' subnets groups randomORsequential <excludedIPs>'.PHP_EOL;
+    echo 'Example: php '.$argv[0].' 10.0.0.0/16,10.1.0.0/16 CLASS100_1A,CLASS100_1B random 10.0.0.1,10.1.0.1'.PHP_EOL;
     exit();
 }
 
 // Pulling information from command line
 
-$subnets    = $argv[1]; // Example: 10.0.0.0/16,10.1.0.0/16
-$groups     = $argv[2]; // Example: CLASS100_1A,CLASS100_1B
+$subnets            = $argv[1]; // Example: 10.0.0.0/16,10.1.0.0/16
+$groups             = $argv[2]; // Example: CLASS100_1A,CLASS100_1B
+$randomORsequential = $argv[3]; // Example: sequential
 
 $excludedIPs = '';
-if(isset($argv[3]))
+if(isset($argv[4]))
 {
-    $excludedIPs = $argv[3]; // Example: 10.0.0.1,10.1.0.1
+    $excludedIPs = $argv[4]; // Example: 10.0.0.1,10.1.0.1
 }
 
 // Transforming data to be used for the application
@@ -45,6 +46,11 @@ foreach ($subnets as &$subnet)
     {
         $hosts[] = (string) $host;
     }
+}
+
+if($randomORsequential == 'random')
+{
+    shuffle($hosts);
 }
 
 // Remove excluded IPs
